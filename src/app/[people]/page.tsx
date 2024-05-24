@@ -40,7 +40,10 @@ const PeoplePage = ({ params }: { params: { people: string } }) => {
       {user && (
         <section>
           <div className="flex justify-center">
-            <img src={user.avatar} alt={`${user.first_name} ${user.last_name} avatar`} />
+            <img
+              src={user.avatar}
+              alt={`${user.first_name} ${user.last_name} avatar`}
+            />
           </div>
           <p className="text-center">{user.email}</p>
           <p className="text-center">{user.first_name}</p>
