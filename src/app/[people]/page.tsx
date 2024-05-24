@@ -4,7 +4,7 @@ import { TUser } from "@/components/Form/Form";
 import Link from "next/link";
 import { FaChevronLeft } from "react-icons/fa";
 
-const peoplePage = ({ params }: { params: { people: string } }) => {
+const PeoplePage = ({ params }: { params: { people: string } }) => {
   const [user, setUser] = useState<TUser | null>(null);
 
   useEffect(() => {
@@ -51,4 +51,4 @@ const peoplePage = ({ params }: { params: { people: string } }) => {
   );
 };
 
-export default peoplePage;
+export default PeoplePage;
