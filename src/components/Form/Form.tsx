@@ -28,7 +28,7 @@ const UserForm = () => {
       <h1 className="text-[2rem] font-bold uppercase text-gray-500 text-center mt-[40px]">
         Poeples Details
       </h1>
-
+      <Link href="/SignUpPage" className="underline text-blue-500">signup</Link>
       <div className="flex flex-wrap items-center justify-center w-1/1 mx-auto mt-[100px] m-[40px]">
         {users.map((user) => (
           <div
@@ -54,7 +54,7 @@ const UserForm = () => {
                 </div>
               </Link>
 
-              <Link href="/SignUpPage">signup</Link>
+              
             </div>
           </div>
         ))}

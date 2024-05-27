@@ -10,26 +10,27 @@ const SignUp = () => {
   });
 
   const [isLoading, setIsLoading] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setData((prev) => ({ ...prev, [name]: value }));
   };
 
-//   const handleAvatarChange = (event: ChangeEvent<HTMLInputElement>) => {
-//     if (event.target.files && event.target.files[0]) {
-//       const avatarFile = event.target.files[0];
-//       const reader = new FileReader();
-//       reader.onloadend = () => {
-//         setData((prev) => ({ ...prev, avatar: reader.result as string }));
-//       };
-//       reader.readAsDataURL(avatarFile);
-//     }
-//   };
-
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
+    setSuccessMessage("");
+    setErrorMessage("");
+    
+
+    if (!data.email || !data.username || !data.password) {
+      setErrorMessage("please fill in the space.");
+      return;
+    }
+    
     setIsLoading(true);
+    
     try {
       const response = await fetch("https://reqres.in/api/users/", {
         method: "POST",
@@ -42,9 +43,15 @@ const SignUp = () => {
       const responseData = await response.json();
       console.log(responseData);
 
-      setIsLoading(false);
+      if (response.ok) {
+        setSuccessMessage("User created successfully!");
+      } else {
+        setErrorMessage("Error creating user.");
+      }
     } catch (error) {
       console.error("Error submitting form:", error);
+      setErrorMessage("Error submitting form.");
+    } finally {
       setIsLoading(false);
     }
   };
@@ -52,10 +59,6 @@ const SignUp = () => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        {/* {data.avatar && <img src={data.avatar} alt="avatar" />}
-        <label htmlFor="avatar">Avatar</label>
-        <input type="file" name="avatar" onChange={handleAvatarChange} /> */}
-
         <label htmlFor="email">Email</label>
         <input
           type="email"
@@ -84,6 +87,8 @@ const SignUp = () => {
           {isLoading ? 'Submitting...' : 'Submit'}
         </button>
       </form>
+    <p className='text-green-500'>{successMessage}</p>
+      <p className='text-red-500'>{errorMessage}</p>
     </div>
   );
 };
