@@ -53,6 +53,8 @@ const UserForm = () => {
                   </button>
                 </div>
               </Link>
+
+              <Link href="/SignUpPage">signup</Link>
             </div>
           </div>
         ))}
